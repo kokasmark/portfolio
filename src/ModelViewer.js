@@ -24,10 +24,10 @@ const addLightsToScene = (numLights, parentState) => {
   const lights = [];
   for (let i = 0; i < numLights; i++) {
     const color = parentState.colors[i] || 0xffffff; // Default color if not provided
-    const intensity = 200; // Adjust intensity value as needed
+    const intensity = 300; // Adjust intensity value as needed
     const position = [
       i % 2 === 0 ? 5 : -5,
-      (parentState.scroll / 200) * 5 + (22 * i),
+      (parentState.scroll / 200) * 5 + (22 * (i+1)),
       5
     ];
     lights.push(
@@ -38,12 +38,12 @@ const addLightsToScene = (numLights, parentState) => {
 };
 
 export default function ModelViewer(props) {
-  const [rotY, setRotY] = useState(-0.8);
+  const [rotY, setRotY] = useState(0);
 
   useEffect(() => {
     const mouseScroll = (e) => {
-      setRotY((prevRotY) => prevRotY + ((e.wheelDelta / 120) * 0.1));
-      props.parent.setScroll(((e.wheelDelta / 120) * 0.1));
+      setRotY((prevRotY) => prevRotY + ((e.wheelDelta / 120) * 0.2));
+      props.parent.setScroll(((e.wheelDelta / 120) * 0.2));
     };
     window.addEventListener("mousewheel", mouseScroll);
 
@@ -57,7 +57,7 @@ export default function ModelViewer(props) {
       <Canvas style={{ width: "100vw", height: "100vh", backgroundColor: 'black' }}>
         <Suspense fallback={null}>
           <Me rotY={rotY} />
-          {/* <OrbitControls enableZoom={false} enablePan={false} /> */}
+          <pointLight position={[0,8,5]} intensity={150}/>
           <ambientLight intensity={0.2} />
           {addLightsToScene(props.parent.state.cards.length, props.parent.state)}
         </Suspense>
