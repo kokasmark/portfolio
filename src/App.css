@@ -2,6 +2,10 @@ html{
   width: 100vw;
   height: 100vh;
   user-select: none;
+  overflow: hidden;
+}
+.App{
+  overflow: hidden;
 }
 .Card{
   width: 400px;

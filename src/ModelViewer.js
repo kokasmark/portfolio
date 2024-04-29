@@ -20,49 +20,46 @@ const Me = ({ rotY }) => {
   return <primitive object={obj} position={[0, -12, 0]} rotation={[0, rotY, 0]} scale={0.5} />;
 };
 
-export default function ModelViewer() {
+const addLightsToScene = (numLights, parentState) => {
+  const lights = [];
+  for (let i = 0; i < numLights; i++) {
+    const color = parentState.colors[i] || 0xffffff; // Default color if not provided
+    const intensity = 200; // Adjust intensity value as needed
+    const position = [
+      i % 2 === 0 ? 5 : -5,
+      (parentState.scroll / 200) * 5 + (22 * i),
+      5
+    ];
+    lights.push(
+      <pointLight key={i} position={position} intensity={intensity} color={color} />
+    );
+  }
+  return lights;
+};
+
+export default function ModelViewer(props) {
   const [rotY, setRotY] = useState(-0.8);
-  const isMouseDown = useRef(false);
 
   useEffect(() => {
-    const mouseDownHandler = () => {
-      isMouseDown.current = true;
+    const mouseScroll = (e) => {
+      setRotY((prevRotY) => prevRotY + ((e.wheelDelta / 120) * 0.1));
+      props.parent.setScroll(((e.wheelDelta / 120) * 0.1));
     };
-
-    const mouseUpHandler = () => {
-      isMouseDown.current = false;
-      setRotY(-0.8);
-    };
-
-    window.addEventListener("mousedown", mouseDownHandler);
-    window.addEventListener("mouseup", mouseUpHandler);
+    window.addEventListener("mousewheel", mouseScroll);
 
     return () => {
-      window.removeEventListener("mousedown", mouseDownHandler);
-      window.removeEventListener("mouseup", mouseUpHandler);
+      window.removeEventListener("mousewheel", mouseScroll);
     };
   }, []);
-
-  useEffect(() => {
-    if (!isMouseDown.current) {
-      const intervalId = setInterval(() => {
-        setRotY((prevRotY) => prevRotY + 0.01);
-      }, 16); // Run the interval approximately every 16 milliseconds (60fps)
-
-      return () => clearInterval(intervalId); // Cleanup function
-    }
-  }, [isMouseDown.current]);
 
   return (
     <div className="Model">
       <Canvas style={{ width: "100vw", height: "100vh", backgroundColor: 'black' }}>
         <Suspense fallback={null}>
           <Me rotY={rotY} />
-          <OrbitControls enableZoom={false} enablePan={false} />
-          <ambientLight intensity={1} />
-          <directionalLight position={[0,5,5]} intensity={2} color={'blue'}></directionalLight>
-          <directionalLight position={[0,5,-5]} intensity={2} color={'red'}></directionalLight>
-          {/* <Environment background preset="sunset"></Environment> */}
+          {/* <OrbitControls enableZoom={false} enablePan={false} /> */}
+          <ambientLight intensity={0.2} />
+          {addLightsToScene(props.parent.state.cards.length, props.parent.state)}
         </Suspense>
       </Canvas>
     </div>
