@@ -26,12 +26,12 @@ const addLightsToScene = (numLights, parentState) => {
     const color = parentState.colors[i] || 0xffffff; // Default color if not provided
     const intensity = 300; // Adjust intensity value as needed
     const position = [
-      i % 2 === 0 ? 5 : -5,
-      (parentState.scroll / 200) * 5 + (22 * (i+1)),
-      5
+      i % 2 === 0 ? 5 : -3,
+      (parentState.scroll / 200) * 5 + (24 * (i+1)),
+      3
     ];
     lights.push(
-      <pointLight key={i} position={position} intensity={intensity} color={color} />
+      <pointLight key={i} position={position} intensity={intensity} color={color} visible={parentState.cardsFlicker ? !parentState.flicker : true}/>
     );
   }
   return lights;
@@ -39,25 +39,59 @@ const addLightsToScene = (numLights, parentState) => {
 
 export default function ModelViewer(props) {
   const [rotY, setRotY] = useState(0);
+  const isMouseDown = useRef(false);
+  var direction = 1;
 
   useEffect(() => {
     const mouseScroll = (e) => {
+      if(e.wheelDelta > 0)
+        direction = 1
+      else
+        direction = -1
       setRotY((prevRotY) => prevRotY + ((e.wheelDelta / 120) * 0.2));
       props.parent.setScroll(((e.wheelDelta / 120) * 0.2));
     };
     window.addEventListener("mousewheel", mouseScroll);
 
+    let touchstartX = 0
+    let touchendX = 0
+        
+    function checkDirection() {
+      if (touchendX < touchstartX) {props.parent.setScroll(-0.83); direction=-1;}
+      if (touchendX > touchstartX) {props.parent.setScroll(0.83); direction=1;}
+    }
+
+    document.addEventListener('touchstart', e => {
+      touchstartX = e.changedTouches[0].screenY
+    })
+
+    document.addEventListener('touchend', e => {
+      touchendX = e.changedTouches[0].screenY
+      checkDirection()
+    })
+
     return () => {
       window.removeEventListener("mousewheel", mouseScroll);
+      window.removeEventListener("touchstart", null);
+      window.removeEventListener("touchend", null);
     };
   }, []);
 
+  useEffect(() => {
+    
+      const intervalId = setInterval(() => {
+        setRotY((prevRotY) => prevRotY + 0.01*direction);
+      }, 16); // Run the interval approximately every 16 milliseconds (60fps)
+
+      return () => clearInterval(intervalId); // Cleanup function
+    
+  }, []);
   return (
     <div className="Model">
-      <Canvas style={{ width: "100vw", height: "100vh", backgroundColor: 'black' }}>
+      <Canvas style={{ width: "100vw", height: "100vh", backgroundColor: '#03090b' }}>
         <Suspense fallback={null}>
           <Me rotY={rotY} />
-          <pointLight position={[0,8,5]} intensity={150}/>
+          {!props.parent.state.flicker && <pointLight position={[0,4-(props.parent.state.scroll / 200) * 5,5]} intensity={100} />}
           <ambientLight intensity={0.2} />
           {addLightsToScene(props.parent.state.cards.length, props.parent.state)}
         </Suspense>
