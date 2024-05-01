@@ -23,12 +23,12 @@ html{
 }
 .Card.right{
   transform: rotateX(10deg) rotateY(20deg);
-  border-width: 2px 5px 2px 2px;
+  border-width: 2px 10px 2px 2px;
   animation: hover-suggest-right 3s infinite linear;
 }
 .Card.left{
   transform: rotateX(10deg) rotateY(-20deg);
-  border-width: 2px 2px 2px 5px;
+  border-width: 2px 2px 2px 10px;
   animation: hover-suggest-left 3s infinite linear;
 }
 .Card:hover{
@@ -140,6 +140,9 @@ html{
   font-weight: bold;
   margin-top: 8px;
   font-size: 10px;
+}
+.bookmark:hover{
+  margin-left: -20px; 
 }
 .bookmark.active{
   margin-left: 0px;
