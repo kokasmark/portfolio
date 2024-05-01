@@ -114,7 +114,36 @@ html{
   position: absolute;
   bottom: 0%;
 }
-
+.Bookmarks{
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  width: 200px;
+  height: fit-content;
+  position: absolute;
+  left: 0%;
+  top: 10%;
+  transform: rotateX(10deg) rotateY(-20deg);
+}
+.Bookmarks .bookmark{
+  width: 100px;
+  height: 30px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  margin-left: -90px;
+  transition: 0.3s;
+}
+.bookmark p{
+  margin: 0px;
+  text-align: center;
+  width: 100%;
+  font-weight: bold;
+  margin-top: 8px;
+  font-size: 10px;
+}
+.bookmark.active{
+  margin-left: 0px;
+}
 .react-activity-calendar__scroll-container{
   overflow-x: hidden !important;
 }

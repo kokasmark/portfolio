@@ -28,7 +28,7 @@ class App extends Component {
     scroll: 0,
     colors: ["#40e0d0","#39FF14","#FF9900","#6A0DAD","#FFFF00","#DC143C","#00FF00","#4f36f5"],
     cards: [
-      {title: "Who am i?", content: <h2>Im a software engineer, with almost 6 years of experience and 5 years of education.</h2>},
+      {title: "Who am i?", content: <h2>Im a software engineer, with almost 6 years of experience and 5 years of education.</h2>, bookmark: 'Myself'},
       {title: "Skills", content: 
         <div>
           <FaReact className='icon'/>
@@ -49,7 +49,7 @@ class App extends Component {
               <li>.Net Maui - Native Phone Applications</li>
             </ul>
           </div>
-        </div>},
+        </div>, bookmark: 'Skills'},
       {title: "Contact info",content: 
         <div>
           <div className='row'> 
@@ -60,11 +60,11 @@ class App extends Component {
             <FaInstagram className='icon'/>
             <h3>kokasmark</h3>
           </div>
-        </div>},
+        </div>, bookmark: 'Contact'},
         {title: "Github",content: 
         <div>
           <GitHubCalendar username="kokasmark" style={{overflow: 'hidden', width: '100%'}}/>
-        </div>},
+        </div>, bookmark: 'Github'},
         {title: "",content: 
         <div>
           <div className='row'> 
@@ -83,7 +83,7 @@ class App extends Component {
             </p>
           </div>
           
-        </div>},
+        </div>, bookmark: 'Itch.io'},
         {title: "",content: 
         <div>
           <div className='row'> 
@@ -99,7 +99,7 @@ class App extends Component {
               as its data structure and for rendering it uses raytracing.
             </p>
           </div>
-        </div>},
+        </div>, bookmark: 'VXEngine'},
         {title: "",content: 
         <div>
           <div className='row'> 
@@ -116,7 +116,7 @@ class App extends Component {
               and a native mobile application.
             </p>
           </div>
-        </div>},
+        </div>, bookmark: 'Flexify'},
         {title: "",content: 
         <div>
           <div className='row'> 
@@ -131,7 +131,7 @@ class App extends Component {
               everything to a simple CMD window with ASCII characters.
             </p>
           </div>
-        </div>}
+        </div>, bookmark: 'Cmd Raycaster'}
         ],
         flicker: false,
         cardsFlicker: false,
@@ -157,7 +157,7 @@ class App extends Component {
       }
       
     };
-  
+    console.log(this.state.scroll)
     updateScroll();
   }
   keyDown(e){
@@ -212,7 +212,6 @@ class App extends Component {
  render(){
   return (
     <div className="App">
-      
       <ModelViewer parent={this}/>
       {this.state.cards.map((info, index) => (
         <InfoCard key={`card-${index}`} position={{x: index % 2 == 0? '65%' : '15%', y:200+((index+1)*1000)+this.state.scroll}} 
@@ -230,6 +229,17 @@ class App extends Component {
         </div>
       </div>
       <h1 className={'title'+(this.state.flicker ? " flicker": "")} style={{top: this.state.scroll}}>Kokas Márk</h1>
+      <div className='Bookmarks'>
+          {this.state.cards.map((card, index) => (
+            <div className={'bookmark'+(Math.abs(this.state.scroll - 200+((index+1)*1000)) < 200 ? " active" : "")} 
+            style={{background: this.state.colors[index]}}
+            onClick={()=> this.setState({scroll: 200-((index+1)*1000)})}>
+                <p>{card.bookmark}</p>
+            </div>
+          ))
+
+          }
+      </div>
     </div>
   );
  }
