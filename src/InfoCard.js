@@ -17,6 +17,7 @@ class InfoCard extends Component {
         <h1>{this.props.info.title}</h1>
         {this.props.info.content}
       </div>
+      {/* <div className='blur'></div> */}
     </div>
   );
  }

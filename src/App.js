@@ -16,6 +16,7 @@ import { FaPython } from "react-icons/fa";
 import { MdAlternateEmail } from "react-icons/md";
 import { FaInstagram } from "react-icons/fa";
 import { FaItchIo } from "react-icons/fa";
+import { SiDotnet } from "react-icons/si";
 
 import { FaMouse } from "react-icons/fa";
 import { FaKeyboard } from "react-icons/fa6";
@@ -36,6 +37,18 @@ class App extends Component {
           <TbBrandCSharp className='icon'/>
           <TbBrandCpp className='icon'/>
           <FaPython className='icon'/>
+          <SiDotnet className="icon"/>
+          <div className='row'>
+            <ul>
+              <li>React - Webdesign, Frontend</li>
+              <li>CSS - Animations</li>
+              <li>Unity - Games, Multiplayer, Shaders</li>
+              <li>C# - Games, GUI Applications</li>
+              <li>C++ - Simulations, OpenGL</li>
+              <li>Python - CLI based projects</li>
+              <li>.Net Maui - Native Phone Applications</li>
+            </ul>
+          </div>
         </div>},
       {title: "Contact info",content: 
         <div>
@@ -59,7 +72,17 @@ class App extends Component {
             <FaItchIo className='icon'/>
           </div>
           <img className='img' src={require('./assets/itch-screenshot.png')}/>
-          <a href='https://kaakas.itch.io/'>My games</a>
+          <a href='https://kaakas.itch.io/' target="_blank" rel="noopener noreferrer" className='link'>My games can be found here</a>
+          <div className='row'> 
+            <p>
+              My game developer carrier started with game jams
+              that i participated in with some online friends
+              i met on a game developer forum.
+
+              We did achieve first place ones and got our games on the podium multiple times.
+            </p>
+          </div>
+          
         </div>},
         {title: "",content: 
         <div>
@@ -69,6 +92,13 @@ class App extends Component {
             <TbBrandCSharp className='icon'/>
           </div>
           <img className='img' src={require('./assets/vxengine-screenshot.webp')}/>
+          <div className='row'>
+            <p>
+              VXEngine is a project im proud of
+              its a voxel engine that uses Sparse Voxel Octrees
+              as its data structure and for rendering it uses raytracing.
+            </p>
+          </div>
         </div>},
         {title: "",content: 
         <div>
@@ -78,6 +108,14 @@ class App extends Component {
             <FaCss3Alt className='icon'/>
           </div>
           <img className='img' src={require('./assets/flexify-screenshot.png')}/>
+          <div className='row'>
+            <p>
+              Flexify is a Workout Planner/Tracker/Creator
+              it was my project to the final exam of my last year in 
+              highschool. It has its own server with users and their data
+              and a native mobile application.
+            </p>
+          </div>
         </div>},
         {title: "",content: 
         <div>
@@ -85,11 +123,19 @@ class App extends Component {
             <h3>Python Cmd Raycaster</h3>
             <FaPython className='icon'/>
           </div>
-          <img className='img' src={require('./assets/python-screenshot.jpg')}/>
+          <img className='img' style={{height: 210}} src={require('./assets/python-screenshot.jpg')}/>
+          <div className='row'>
+            <p>
+              Now this was a project that really amazed everybody
+              i showed it. Its a doom like raycaster that renders
+              everything to a simple CMD window with ASCII characters.
+            </p>
+          </div>
         </div>}
         ],
         flicker: false,
-        cardsFlicker: false
+        cardsFlicker: false,
+        githubRepositories: []
   }
   setScroll(delta) {
     const acceleration = delta*200; // Adjust the acceleration factor as needed
@@ -180,7 +226,7 @@ class App extends Component {
           <FaKeyboard className='icon'/>
           <p>Up/Down Arrows</p>
           <FaLightbulb className='icon'/>
-          <input type='checkbox' onChange={(e)=>this.setState({cardsFlicker: e.target.checked})}/>
+          <input type='checkbox' style={{pointerEvents: 'all'}} onChange={(e)=>this.setState({cardsFlicker: e.target.checked})}/>
         </div>
       </div>
       <h1 className={'title'+(this.state.flicker ? " flicker": "")} style={{top: this.state.scroll}}>Kokas Márk</h1>

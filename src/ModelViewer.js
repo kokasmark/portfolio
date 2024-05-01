@@ -86,6 +86,7 @@ export default function ModelViewer(props) {
       return () => clearInterval(intervalId); // Cleanup function
     
   }, []);
+  
   return (
     <div className="Model">
       <Canvas style={{ width: "100vw", height: "100vh", backgroundColor: '#03090b' }}>
