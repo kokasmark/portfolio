@@ -26,7 +26,7 @@ class App extends Component {
   
   state ={
     scroll: 0,
-    colors: ["#40e0d0","#39FF14","#FF9900","#6A0DAD","#FFFF00","#DC143C","#00FF00","#4f36f5"],
+    colors: ["#40e0d0","#39FF14","#FF9900","#6A0DAD","#FFFF00","#DC143C","#00FF00","#4f36f5","#04e762"],
     cards: [
       {title: "Who am i?", content: <h2>Im a software engineer, with almost 6 years of experience and 5 years of education.</h2>, bookmark: 'Myself'},
       {title: "Skills", content: 
@@ -131,7 +131,21 @@ class App extends Component {
               everything to a simple CMD window with ASCII characters.
             </p>
           </div>
-        </div>, bookmark: 'Cmd Raycaster'}
+        </div>, bookmark: 'Cmd Raycaster'},
+         {title: "",content: 
+          <div>
+            <div className='row'> 
+              <h3>Python Voxel Raycaster</h3>
+              <FaPython className='icon'/>
+            </div>
+            <img className='img' style={{height: 210}} src={require('./assets/voxel-raycaster-screenshot.png')}/>
+            <div className='row'>
+              <p>
+                This project reimplements an old raycasting engine 
+                with an infinite world generation by shifting the height map of the generated terrain.
+              </p>
+            </div>
+          </div>, bookmark: 'Voxel Raycaster'}
         ],
         flicker: false,
         cardsFlicker: false,
