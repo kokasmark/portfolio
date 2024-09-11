@@ -26,9 +26,14 @@ class App extends Component {
   
   state ={
     scroll: 0,
-    colors: ["#40e0d0","#39FF14","#FF9900","#6A0DAD","#FFFF00","#DC143C","#00FF00","#4f36f5"],
+    colors: ["#40e0d0","#39FF14","#FF9900","#6A0DAD","#FFFF00","#DC143C","#00FF00","#4f36f5","#32a852"],
     cards: [
-      {title: "Who am i?", content: <h2>Im a software engineer, with almost 6 years of experience and 5 years of education.</h2>, bookmark: 'Myself'},
+      {title: "Who am i?", content:
+         <div>
+            <p>Im a software engineer, with 5 years of education. I earned two profession certificates in 
+              Győri Szakképzési Centrum Jedlik Ányos Gépipari és Informatikai Technikum és Kollégium,
+              A software engineer and tester and a mobile application engineer. I started university at Széchenyi István Egyetem.</p>
+         </div>, bookmark: 'Myself'},
       {title: "Skills", content: 
         <div>
           <FaReact className='icon'/>
@@ -66,6 +71,53 @@ class App extends Component {
           <GitHubCalendar username="kokasmark" style={{overflow: 'hidden', width: '100%'}}/>
         </div>, bookmark: 'Github'},
         {title: "",content: 
+          <div>
+            <div className='row'> 
+              <h3>Flexify</h3>
+              <FaReact className='icon'/>
+              <FaCss3Alt className='icon'/>
+            </div>
+            <img className='img' src={require('./assets/flexify-screenshot.png')}/>
+            <div className='row'>
+              <p>
+                Flexify is a Workout Planner/Tracker/Creator
+                it was my project to the final exam of my last year in 
+                highschool. It has its own server with users and their data
+                and a native mobile application.
+              </p>
+            </div>
+          </div>, bookmark: 'Flexify'},
+          {title: "",content: 
+            <div>
+              <div className='row'> 
+                <h3>Flexify Mobile</h3>
+                <SiDotnet className='icon'/>
+                <TbBrandCSharp className='icon'/>
+              </div>
+              <img className='img' style={{height: 210}} src={require('./assets/flexify-mobile.png')}/>
+              <div className='row'>
+                <p>
+                  A standalone mobile application containing all feautures of the workout planner/tracker Flexify.
+                </p>
+              </div>
+            </div>, bookmark: 'Flexify Mobile'},
+          {title: "",content: 
+          <div>
+            <div className='row'> 
+              <h3>Neptune</h3>
+              <FaReact className='icon'/>
+              <FaCss3Alt className='icon'/>
+            </div>
+            <img className='img' style={{height: 210}} src={require('./assets/neptune-screenshot.png')}/>
+            <div className='row'>
+              <p>
+                A fresh UI created for the hungarian university software called Neptun.
+                Its clean and easy to understand UI helps navigating the famously outdated Neptun.
+              </p>
+            </div>
+          </div>, bookmark: 'Neptune'},
+          
+        {title: "",content: 
         <div>
           <div className='row'> 
             <h3>Itch.io</h3>
@@ -88,50 +140,18 @@ class App extends Component {
         <div>
           <div className='row'> 
             <h3>VXEngine</h3>
-            <FaUnity className='icon'/>
+            <SiDotnet className='icon'/>
             <TbBrandCSharp className='icon'/>
           </div>
-          <img className='img' src={require('./assets/vxengine-screenshot.webp')}/>
+          <img className='img' src={require('./assets/vxngine-screenshot.png')}/>
           <div className='row'>
             <p>
               VXEngine is a project im proud of
-              its a voxel engine that uses Sparse Voxel Octrees
-              as its data structure and for rendering it uses raytracing.
+              its a voxel engine entirely written from scratch using OpenGL and C#.
+              Parralel threads and other GPU optimizations make this engine fast.
             </p>
           </div>
-        </div>, bookmark: 'VXEngine'},
-        {title: "",content: 
-        <div>
-          <div className='row'> 
-            <h3>Flexify</h3>
-            <FaReact className='icon'/>
-            <FaCss3Alt className='icon'/>
-          </div>
-          <img className='img' src={require('./assets/flexify-screenshot.png')}/>
-          <div className='row'>
-            <p>
-              Flexify is a Workout Planner/Tracker/Creator
-              it was my project to the final exam of my last year in 
-              highschool. It has its own server with users and their data
-              and a native mobile application.
-            </p>
-          </div>
-        </div>, bookmark: 'Flexify'},
-        {title: "",content: 
-        <div>
-          <div className='row'> 
-            <h3>Python Cmd Raycaster</h3>
-            <FaPython className='icon'/>
-          </div>
-          <img className='img' style={{height: 210}} src={require('./assets/python-screenshot.jpg')}/>
-          <div className='row'>
-            <p>
-              Now this was a project that really amazed everybody
-              i showed it. Its a doom like raycaster that renders
-              everything to a simple CMD window with ASCII characters.
-            </p>
-          </div>
-        </div>, bookmark: 'Cmd Raycaster'}
+        </div>, bookmark: 'VXEngine'}
         ],
         flicker: false,
         cardsFlicker: false,
